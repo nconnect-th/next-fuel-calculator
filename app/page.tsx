@@ -3,13 +3,8 @@
 export default function Home() {
     return (
       <div>
-        <h1>Welcome to the Home Page</h1>
-        {/* Additional content here */}
-      </div>
-    );
-  }
-
-  import { useState } from 'react';
+       import { useState } from 'react';
+import '../styles/globals.css';
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
@@ -27,9 +22,7 @@ export default function FuelCalculator() {
   };
 
   return (
-
-
-  <div className="max-w-lg mx-auto mt-10 p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl shadow-lg text-white">
+    <div className="max-w-lg mx-auto mt-10 p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl shadow-lg text-white">
       <h2 className="text-2xl font-bold text-center mb-4">Fuel Calculator</h2>
 
       <form className="space-y-6">
@@ -94,3 +87,10 @@ export default function FuelCalculator() {
     </div>
   );
 }
+
+      </div>
+    );
+  }
+
+  
+  
