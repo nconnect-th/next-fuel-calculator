@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import '../styles/globals.css';
+
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
