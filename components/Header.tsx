@@ -1,5 +1,18 @@
-// components/Header.tsx
-const Header = () => {
+import { useState } from 'react';
+
+const navigation = [
+  { name: 'Home', href: 'https://www.nconnect.asia/', current: true },
+  { name: 'About', href: 'https://www.nconnect.asia/about', current: false },
+  { name: 'Showcase', href: 'https://www.nconnect.asia/work', current: false },
+  { name: 'Insights', href: 'http://insights.nconnect.asia', current: false },
+  { name: 'Contact', href: 'https://www.nconnect.asia/contact', current: false },
+];
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default function Header() {
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -48,53 +61,36 @@ const Header = () => {
             <div className="flex flex-shrink-0 items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
+                src="https://www.nconnect.asia/wp-content/uploads/2024/06/SQ.png"
+                alt="nConnect"
               />
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-              <a
-                href="#"
-                className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-                aria-current="page"
-              >
-                Dashboard
-              </a>
-              <a
-                href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Team
-              </a>
-              <a
-                href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Projects
-              </a>
-              <a
-                href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Calendar
-              </a>
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'rounded-md px-3 py-2 text-sm font-medium'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <button
                 type="button"
+                onClick={() => window.open('https://to.nconnect.asia/nConnectLINE', '_blank')}
                 className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                <svg
-                  className="-ml-0.5 h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                </svg>
-                New Job
+                Add Line
               </button>
             </div>
             <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
@@ -142,14 +138,13 @@ const Header = () => {
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
-                  tabIndex="-1"
+                  tabIndex={-1}
                 >
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-0"
+                    tabIndex={-1}
                   >
                     Your Profile
                   </a>
@@ -157,8 +152,7 @@ const Header = () => {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-1"
+                    tabIndex={-1}
                   >
                     Settings
                   </a>
@@ -166,8 +160,7 @@ const Header = () => {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-2"
+                    tabIndex={-1}
                   >
                     Sign out
                   </a>
@@ -179,6 +172,4 @@ const Header = () => {
       </div>
     </nav>
   );
-};
-
-export default Header;
+}
