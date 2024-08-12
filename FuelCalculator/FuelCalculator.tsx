@@ -53,7 +53,7 @@ export default function FuelCalculator() {
 
         <div>
           <label htmlFor="rangeKm" className="block text-sm font-medium">
-            จำนวนที่รถวิ่งไป (KM)
+            จำนวนที่รถวิ่งไป (กม.)
           </label>
           <input
             id="rangeKm"
