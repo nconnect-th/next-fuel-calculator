@@ -1,10 +1,5 @@
-// app/page.tsx
-
-export default function Home() {
-    return (
-      <div>
-       import { useState } from 'react';
-import '../styles/globals.css';
+import { useState } from 'react';
+import '../styles/globals.css'; // Ensure this path is correct
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
@@ -81,16 +76,13 @@ export default function FuelCalculator() {
 
       <div className="mt-8 p-4 bg-white text-gray-900 rounded-lg shadow-md">
         <h3 className="text-xl font-semibold text-center">สรุป</h3>
-        <p className="mt-4 text-center text-gray-700">ค่าน้ำมันที่ต้องจ่าย: <strong className="text-indigo-600">{totalCost} THB</strong></p>
-        <p className="mt-2 text-center text-gray-700">เทียบเทียบการเดินทาง: <strong className="text-indigo-600">{rangePerLiter} กม./ลิตร</strong></p>
+        <p className="mt-4 text-center text-gray-700">
+          ค่าน้ำมันที่ต้องจ่าย: <strong className="text-indigo-600">{totalCost} THB</strong>
+        </p>
+        <p className="mt-2 text-center text-gray-700">
+          เทียบเทียบการเดินทาง: <strong className="text-indigo-600">{rangePerLiter} กม./ลิตร</strong>
+        </p>
       </div>
     </div>
   );
 }
-
-      </div>
-    );
-  }
-
-  
-  
