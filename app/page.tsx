@@ -1,7 +1,7 @@
-"use client"; // This directive tells Next.js that this is a client component
+"use client";
 
 import { useState } from 'react';
-import '../styles/globals.css'; // Ensure this path is correct
+import '../styles/globals.css';
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
