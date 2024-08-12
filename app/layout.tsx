@@ -1,3 +1,16 @@
+import Header from '../components/Header';
+
+export default function Home() {
+  return (
+    <div>
+      <Header />
+      <main>
+        {/* Your page content here */}
+      </main>
+    </div>
+  );
+}
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
