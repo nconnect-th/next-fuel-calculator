@@ -4,11 +4,12 @@
 import { useState } from 'react';
 
 const navigation = [
-  { name: 'Home', href: 'https://www.nconnect.asia/', current: true },
+  { name: 'Home', href: 'https://www.nconnect.asia/', current: false },
   { name: 'About', href: 'https://www.nconnect.asia/about', current: false },
   { name: 'Showcase', href: 'https://www.nconnect.asia/work', current: false },
   { name: 'Insights', href: 'http://insights.nconnect.asia', current: false },
   { name: 'Contact', href: 'https://www.nconnect.asia/contact', current: false },
+  { name: 'Fuel', href: 'https://next-fuel-calculator.vercel.app/', current: true },
 ];
 
 function classNames(...classes: string[]) {
