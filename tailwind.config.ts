@@ -1,6 +1,5 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+// tailwind.config.js
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -8,7 +7,7 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [],
-};
-
-export default config;
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
