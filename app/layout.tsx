@@ -1,7 +1,7 @@
 import Header from '../components/Header'; // Correct path to Header component
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../styles/globals.css"; // Ensure this path is correct as well
+import "./styles/globals.css"; // Ensure this path is correct as well
 
 const inter = Inter({ subsets: ["latin"] });
 
