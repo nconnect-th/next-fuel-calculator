@@ -1,8 +1,7 @@
-// app/layout.tsx
-import Header from './components/Header';
+import Header from './components/Header'; // Ensure the path is correct
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import '../styles/globals.css';
+import "../styles/globals.css"; // Correct the path to the global CSS file
 
 const inter = Inter({ subsets: ["latin"] });
 
