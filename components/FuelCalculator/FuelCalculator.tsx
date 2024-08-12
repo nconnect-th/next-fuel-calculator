@@ -1,4 +1,7 @@
-import { useState } from "react";
+// components/FuelCalculator.tsx
+"use client";
+
+import { useState } from 'react';
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
@@ -18,13 +21,10 @@ export default function FuelCalculator() {
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-lg font-semibold text-gray-900">Fuel Calculator</h2>
-
+      
       <form className="space-y-6 mt-6">
         <div>
-          <label
-            htmlFor="fuelPerLiter"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="fuelPerLiter" className="block text-sm font-medium text-gray-700">
             Fuel Price per Liter (THB)
           </label>
           <input
@@ -38,10 +38,7 @@ export default function FuelCalculator() {
         </div>
 
         <div>
-          <label
-            htmlFor="maxLiters"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="maxLiters" className="block text-sm font-medium text-gray-700">
             Maximum Liters
           </label>
           <input
@@ -55,10 +52,7 @@ export default function FuelCalculator() {
         </div>
 
         <div>
-          <label
-            htmlFor="rangeKm"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="rangeKm" className="block text-sm font-medium text-gray-700">
             Range (KM)
           </label>
           <input
@@ -84,12 +78,8 @@ export default function FuelCalculator() {
 
       <div className="mt-6">
         <h3 className="text-lg font-medium text-gray-900">Summary</h3>
-        <p className="mt-2 text-sm text-gray-700">
-          Total Fuel Cost: <strong>{totalCost} THB</strong>
-        </p>
-        <p className="mt-1 text-sm text-gray-700">
-          Range per Liter: <strong>{rangePerLiter} KM/Liter</strong>
-        </p>
+        <p className="mt-2 text-sm text-gray-700">Total Fuel Cost: <strong>{totalCost} THB</strong></p>
+        <p className="mt-1 text-sm text-gray-700">Range per Liter: <strong>{rangePerLiter} KM/Liter</strong></p>
       </div>
     </div>
   );
