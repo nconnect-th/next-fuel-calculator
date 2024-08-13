@@ -1,105 +1,99 @@
-// components/Header.tsx
-"use client";
+"use client"; // Ensure this is a client-side component
 
-import { useState } from 'react';
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Home', href: 'https://www.nconnect.asia/', current: false },
+  { name: 'Home', href: 'https://www.nconnect.asia/', current: true },
   { name: 'About', href: 'https://www.nconnect.asia/about', current: false },
   { name: 'Showcase', href: 'https://www.nconnect.asia/work', current: false },
   { name: 'Insights', href: 'http://insights.nconnect.asia', current: false },
   { name: 'Contact', href: 'https://www.nconnect.asia/contact', current: false },
-  { name: 'Fuel', href: 'https://next-fuel-calculator.vercel.app/', current: true },
 ];
 
-function classNames(...classes: string[]) {
+function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Header() {
   return (
-    <nav className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 justify-between">
-          <div className="flex">
-            <div className="-ml-2 mr-2 flex items-center md:hidden">
-              <button
-                type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="absolute -inset-0.5"></span>
-                <span className="sr-only">Open main menu</span>
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-                <svg
-                  className="hidden h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="flex flex-shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://www.nconnect.asia/wp-content/uploads/2024/06/SQ.png"
-                alt="nConnect"
-              />
-            </div>
-            <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-              {navigation.map((item) => (
+    <Disclosure as="nav" className="bg-white shadow-md">
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-shrink-0 items-center">
+                  <a href="https://www.nconnect.asia/">
+                    <img
+                      src="https://www.nconnect.asia/wp-content/uploads/2024/06/SQ.png"
+                      alt="nConnect Logo"
+                      className="h-8 w-auto"
+                    />
+                  </a>
+                </div>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <a
+                  href="https://to.nconnect.asia/nConnectLINE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-500 text-center"
+                >
+                  Add LINE
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Disclosure.Button
                   key={item.name}
+                  as="a"
                   href={item.href}
                   className={classNames(
-                    item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'rounded-md px-3 py-2 text-sm font-medium'
+                    item.current ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-700 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
-                </a>
+                </Disclosure.Button>
               ))}
             </div>
-          </div>
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <button
-                type="button"
-                onClick={() => window.open('https://to.nconnect.asia/nConnectLINE', '_blank')}
-                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                Add Line
-              </button>
-            </div>
-           
-          </div>
-        </div>
-      </div>
-    </nav>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
 }

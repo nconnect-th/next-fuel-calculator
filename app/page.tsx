@@ -20,7 +20,7 @@ export default function FuelCalculator() {
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 md:p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl shadow-lg text-white">
-      <h2 className="text-xl md:text-2xl font-bold text-center mb-4">Fuel Calculator | ระบบคำนวนค่าน้ำมัน และการใช้งาน</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-4">ระบบคำนวนค่าน้ำมัน | Fuel Calculator </h2>
 
       <form className="space-y-4 md:space-y-6">
         <div>
@@ -86,5 +86,8 @@ export default function FuelCalculator() {
         </p>
       </div>
     </div>
+
+
+
   );
 }
