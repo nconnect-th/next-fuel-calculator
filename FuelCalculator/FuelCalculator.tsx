@@ -8,16 +8,20 @@ export default function FuelCalculator() {
   const [rangeKm, setRangeKm] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [rangePerLiter, setRangePerLiter] = useState<number>(0);
-  const [thbPerKm, setThbPerKm] = useState<number>(0); // เพิ่มสถานะสำหรับ THB Per KM
+  const [thbPerKm, setThbPerKm] = useState<number>(0);
+  const [unit, setUnit] = useState<string>('liter'); // เพิ่มสถานะสำหรับหน่วยน้ำมัน
+
+  const gallonToLiter = 3.78541; // ค่าแปลงจากแกลลอนเป็นลิตร
 
   const calculate = () => {
-    const cost = fuelPerLiter * maxLiters;
-    const range = rangeKm / maxLiters;
+    const liters = unit === 'gallon' ? maxLiters * gallonToLiter : maxLiters;
+    const cost = fuelPerLiter * liters;
+    const range = rangeKm / liters;
     const thbPerKm = cost / rangeKm;
 
     setTotalCost(parseFloat(cost.toFixed(2)));
     setRangePerLiter(parseFloat(range.toFixed(2)));
-    setThbPerKm(parseFloat(thbPerKm.toFixed(2))); // อัพเดตสถานะ THB Per KM
+    setThbPerKm(parseFloat(thbPerKm.toFixed(2)));
   };
 
   return (
@@ -27,7 +31,7 @@ export default function FuelCalculator() {
       <form className="space-y-6">
         <div>
           <label htmlFor="fuelPerLiter" className="block text-sm font-medium">
-            ค่าน้ำมันต่อลิตร (THB)
+            ค่าน้ำมันต่อหน่วย (THB)
           </label>
           <input
             id="fuelPerLiter"
@@ -35,13 +39,28 @@ export default function FuelCalculator() {
             value={fuelPerLiter}
             onChange={(e) => setFuelPerLiter(parseFloat(e.target.value))}
             className="mt-1 block w-full rounded-lg border-0 p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
-            placeholder="Enter fuel price per liter"
+            placeholder="Enter fuel price per unit"
           />
         </div>
 
         <div>
+          <label htmlFor="unit" className="block text-sm font-medium">
+            หน่วยของน้ำมัน
+          </label>
+          <select
+            id="unit"
+            value={unit}
+            onChange={(e) => setUnit(e.target.value)}
+            className="mt-1 block w-full rounded-lg border-0 p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
+          >
+            <option value="liter">ลิตร</option>
+            <option value="gallon">แกลลอน</option>
+          </select>
+        </div>
+
+        <div>
           <label htmlFor="maxLiters" className="block text-sm font-medium">
-            เติมน้ำมันกี่ลิตร
+            จำนวนที่เติม (ตามหน่วยที่เลือก)
           </label>
           <input
             id="maxLiters"
@@ -49,7 +68,7 @@ export default function FuelCalculator() {
             value={maxLiters}
             onChange={(e) => setMaxLiters(parseFloat(e.target.value))}
             className="mt-1 block w-full rounded-lg border-0 p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
-            placeholder="Enter maximum liters"
+            placeholder={`Enter maximum ${unit === 'gallon' ? 'gallons' : 'liters'}`}
           />
         </div>
 
@@ -82,7 +101,7 @@ export default function FuelCalculator() {
         <h3 className="text-xl font-semibold text-center">สรุป</h3>
         <p className="mt-4 text-center text-gray-700">ค่าน้ำมันที่ต้องจ่าย: <strong className="text-indigo-600">{totalCost} THB</strong></p>
         <p className="mt-2 text-center text-gray-700">ระยะทางที่วิ่งต่อการเติม: <strong className="text-indigo-600">{rangePerLiter} กม./ลิตร</strong></p>
-        <p className="mt-2 text-center text-gray-700">ราคาต่อกิโลเมตร: <strong className="text-indigo-600">{thbPerKm} THB/KM</strong></p> {/* แสดงผล THB Per KM */}
+        <p className="mt-2 text-center text-gray-700">ราคาต่อกิโลเมตร: <strong className="text-indigo-600">{thbPerKm} THB/KM</strong></p>
       </div>
     </div>
   );
