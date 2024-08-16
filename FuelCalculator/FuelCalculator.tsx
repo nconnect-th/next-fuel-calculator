@@ -1,7 +1,6 @@
 "use client"; // Add this line at the top
 
 import { useState } from 'react';
-import '../styles/globals.css';
 
 export default function FuelCalculator() {
   const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
@@ -9,13 +8,16 @@ export default function FuelCalculator() {
   const [rangeKm, setRangeKm] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [rangePerLiter, setRangePerLiter] = useState<number>(0);
+  const [thbPerKm, setThbPerKm] = useState<number>(0); // เพิ่มสถานะสำหรับ THB Per KM
 
   const calculate = () => {
     const cost = fuelPerLiter * maxLiters;
     const range = rangeKm / maxLiters;
+    const thbPerKm = cost / rangeKm;
 
     setTotalCost(parseFloat(cost.toFixed(2)));
     setRangePerLiter(parseFloat(range.toFixed(2)));
+    setThbPerKm(parseFloat(thbPerKm.toFixed(2))); // อัพเดตสถานะ THB Per KM
   };
 
   return (
@@ -53,7 +55,7 @@ export default function FuelCalculator() {
 
         <div>
           <label htmlFor="rangeKm" className="block text-sm font-medium">
-            จำนวนที่รถวิ่งไป (กม.)
+            จำนวนที่รถวิ่งไป (KM)
           </label>
           <input
             id="rangeKm"
@@ -79,7 +81,8 @@ export default function FuelCalculator() {
       <div className="mt-8 p-4 bg-white text-gray-900 rounded-lg shadow-md">
         <h3 className="text-xl font-semibold text-center">สรุป</h3>
         <p className="mt-4 text-center text-gray-700">ค่าน้ำมันที่ต้องจ่าย: <strong className="text-indigo-600">{totalCost} THB</strong></p>
-        <p className="mt-2 text-center text-gray-700">เทียบเทียบการเดินทาง: <strong className="text-indigo-600">{rangePerLiter} กม./ลิตร</strong></p>
+        <p className="mt-2 text-center text-gray-700">ระยะทางที่วิ่งต่อการเติม: <strong className="text-indigo-600">{rangePerLiter} กม./ลิตร</strong></p>
+        <p className="mt-2 text-center text-gray-700">ราคาต่อกิโลเมตร: <strong className="text-indigo-600">{thbPerKm} THB/KM</strong></p> {/* แสดงผล THB Per KM */}
       </div>
     </div>
   );
