@@ -4,21 +4,27 @@ import { useState } from 'react';
 import '../styles/globals.css';
 
 export default function FuelCalculator() {
-  const [fuelPerLiter, setFuelPerLiter] = useState<number>(0);
-  const [maxLiters, setMaxLiters] = useState<number>(0);
-  const [rangeKm, setRangeKm] = useState<number>(0);
+  const [fuelPerLiter, setFuelPerLiter] = useState<string>(''); // ค่าเริ่มต้นเป็นค่าว่าง
+  const [maxLiters, setMaxLiters] = useState<string>(''); // ค่าเริ่มต้นเป็นค่าว่าง
+  const [rangeKm, setRangeKm] = useState<string>(''); // ค่าเริ่มต้นเป็นค่าว่าง
   const [totalCost, setTotalCost] = useState<number>(0);
   const [rangePerLiter, setRangePerLiter] = useState<number>(0);
   const [thbPerKm, setThbPerKm] = useState<number>(0); // เพิ่มสถานะสำหรับ THB per KM
 
   const calculate = () => {
-    const cost = fuelPerLiter * maxLiters;
-    const range = rangeKm / maxLiters;
-    const thbPerKm = cost / rangeKm;
+    const fuelPerLiterNum = parseFloat(fuelPerLiter);
+    const maxLitersNum = parseFloat(maxLiters);
+    const rangeKmNum = parseFloat(rangeKm);
 
-    setTotalCost(parseFloat(cost.toFixed(2)));
-    setRangePerLiter(parseFloat(range.toFixed(2)));
-    setThbPerKm(parseFloat(thbPerKm.toFixed(2))); // อัพเดตสถานะ THB per KM
+    if (!isNaN(fuelPerLiterNum) && !isNaN(maxLitersNum) && !isNaN(rangeKmNum)) {
+      const cost = fuelPerLiterNum * maxLitersNum;
+      const range = rangeKmNum / maxLitersNum;
+      const thbPerKm = cost / rangeKmNum;
+
+      setTotalCost(parseFloat(cost.toFixed(2)));
+      setRangePerLiter(parseFloat(range.toFixed(2)));
+      setThbPerKm(parseFloat(thbPerKm.toFixed(2))); // อัพเดตสถานะ THB per KM
+    }
   };
 
   return (
@@ -34,7 +40,7 @@ export default function FuelCalculator() {
             id="fuelPerLiter"
             type="number"
             value={fuelPerLiter}
-            onChange={(e) => setFuelPerLiter(parseFloat(e.target.value))}
+            onChange={(e) => setFuelPerLiter(e.target.value)}
             className="mt-1 block w-full rounded-lg border-0 p-2 md:p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
             placeholder="Enter fuel price per liter"
           />
@@ -48,7 +54,7 @@ export default function FuelCalculator() {
             id="maxLiters"
             type="number"
             value={maxLiters}
-            onChange={(e) => setMaxLiters(parseFloat(e.target.value))}
+            onChange={(e) => setMaxLiters(e.target.value)}
             className="mt-1 block w-full rounded-lg border-0 p-2 md:p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
             placeholder="Enter maximum liters"
           />
@@ -62,7 +68,7 @@ export default function FuelCalculator() {
             id="rangeKm"
             type="number"
             value={rangeKm}
-            onChange={(e) => setRangeKm(parseFloat(e.target.value))}
+            onChange={(e) => setRangeKm(e.target.value)}
             className="mt-1 block w-full rounded-lg border-0 p-2 md:p-3 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
             placeholder="Enter range in kilometers"
           />
